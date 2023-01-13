@@ -1,4 +1,4 @@
-### About this Course
+# About this Course
 
 In this course, you will be introduced to foundational programming skills with basic Python Syntax. You’ll learn how to use code to solve problems. You’ll dive deep into the Python ecosystem and learn popular modules, libraries and tools for Python. 
 
@@ -33,25 +33,25 @@ Python Programming
 Computer Programming
 Django (Web Framework)
 
-# WEEK 1
+### WEEK 1
 8 hours to complete
 Getting started with Python
 Get started with the Python programming language and associated foundational concepts.
 19 videos (Total 89 min), 17 readings, 4 quizzes
 
-# WEEK 2
+### WEEK 2
 10 hours to complete
 Basic Programming with Python
 Learn basic Python syntax, to use control flow and loops and work with functions and data structures. You will also learn how to recognise possible errors, their causes and how to handle them.
 13 videos (Total 58 min), 9 readings, 7 quizzes
 
-# WEEK 3
+### WEEK 3
 15 hours to complete
 Programming paradigms
 Learn about the paradigms of procedural programming and the associated logical concepts. You'll explore functional and object-oriented programming, and get an introduction to algorithms.
 16 videos (Total 75 min), 19 readings, 11 quizzes
 
-# WEEK 4
+### WEEK 4
 10 hours to complete
 Modules, packages, libraries and tools
 Supercharge your coding environment with popular modules libraries and tools for Python. You'll also learn about the different types of testing and how to write a test.
