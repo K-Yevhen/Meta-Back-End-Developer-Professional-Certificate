@@ -3,6 +3,8 @@ Import statements:
     1. Import pytest and spellcheck modules
 '''
 ### WRITE IMPORT STATEMENTS HERE
+import pytest
+import spellcheck
 
 # String variables to be tested
 alpha = "Checking the length & structure of the sentence."
@@ -27,8 +29,11 @@ def test_length(input_value):
                    in the input_value() function
     """
     ### WRITE SOLUTION CODE HERE
+    assert spellcheck.word_count(input_value) < 10
+    assert spellcheck.char_count(input_value) < 50
 
-    raise NotImplementedError()
+
+    # raise NotImplementedError()
 
 # Second test function test_struc()
 def test_struc(input_value):
@@ -43,7 +48,9 @@ def test_struc(input_value):
                    in the input_value() function
     """
     ### WRITE SOLUTION CODE HERE
+    assert spellcheck.first_char(input_value).isupper()
+    assert spellcheck.last_char(input_value).endswith('.')
 
-    raise NotImplementedError()
+    #raise NotImplementedError()
 
 # Run these tests with `python3 -m pytest test_spellcheck.py`
