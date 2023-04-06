@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<p> Menu</p>
-<p> This is a Menu page for Little Lemon </p>
+<h1>Menu</h1>
+<!--Begin col-->
+<div class="column">
+    {% for item in menu.menu %}
+   <p>
+       {{ item.name }}
+       <span class="menu-price">
+         ${{ item.price }}.00
+      </span>
+   </p>
+    {% endfor %}
+</div>
+<!--End col-->
 {% endblock %}

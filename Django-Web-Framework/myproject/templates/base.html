@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,16 +37,12 @@
   </head>
 
   <body>
+    <!--Header content-->
     {% include 'partials/_header.html' %}
 
-    <main>
-        <!-- Begin block content -->
+    <main>{% block content %} {% endblock %}</main>
 
-        {% block content%}
-        {% endblock %}
-
-        <!-- End block content -->
-    </main>
-
+    <!--Footer content-->
+    <!-- Replace this comment with your code  -->
   </body>
 </html>
