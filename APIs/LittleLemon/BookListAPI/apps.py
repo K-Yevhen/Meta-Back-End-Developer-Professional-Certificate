@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 
-
-class LittlelemonapiConfig(AppConfig):
+class BooklistapiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'LittlelemonAPI'
+    name = 'BookListAPI'
