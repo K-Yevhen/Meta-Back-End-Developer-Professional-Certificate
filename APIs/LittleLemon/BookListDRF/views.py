@@ -9,3 +9,8 @@ from rest_framework import generics
 class BookView(generics.ListCreateAPIView):
     queryset = Book_DRF.objects.all()
     serializer_class = BookSerializer
+
+
+class SingleBookView(generics.RetrieveUpdateAPIView):
+    queryset = Book_DRF.objects.all()
+    serializer_class = BookSerializer
