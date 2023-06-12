@@ -68,7 +68,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'email')
+        fields = ['id', 'username', 'first_name', 'last_name', 'email']
 
 
 class CartItemSerializer(serializers.ModelSerializer):
@@ -83,4 +83,11 @@ class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = ['id', 'menuitem', 'quantity', 'unit_price', 'price']
-        
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_items = OrderItemSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Order
+        fiels = ['id', 'user', 'delivery_crew','order_items', 'status', 'total', 'date']
