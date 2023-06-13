@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'BookListAPI',
-    'BookListDRF',
+    # 'BookListAPI',
+    # 'BookListDRF',
     'LittleLemonDRF',
     'rest_framework.authtoken',
     'djoser',
@@ -146,4 +146,12 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
+    'DEFAULT_THROTTLE_RATES': {
+        "anon": "5/minute",
+        "user": "25/minute",
+    }
+}
+
+DJOSER = {
+    "USER_ID_FIELD": "username",
 }
