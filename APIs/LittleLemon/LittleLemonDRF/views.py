@@ -144,5 +144,49 @@ class UserGroupManagement(APIView):
         except:
             return Response("Not authorized...", status=status.HTTP_401_UNAUTHORIZED)
 
+@csrf_exempt
+@throttle_classes([AnonRateThrottle, UserRateThrottle])
+@api_view(["DELETE"])
+class RemoveUserFromManagerGroup(APIView):
+    def delete(self, request, id):
+        # Getting a particular user object
+        try:
+            user = User.objects.get(id=id)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Removing a user from the manager group by a manager
+        group = Group.objects.get(name='Manager')
+        if request.user.groups.filter(name="Manager"):
+            if group in user.groups.all():
+                user.groups.remove(group)
+                return Response("User removed successfully!", status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'User is not a member of the manager group'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response("Not authorized", status=status.HTTP_401_UNAUTHORIZED)
+
+@csrf_exempt
+@throttle_classes([AnonRateThrottle, UserRateThrottle])
+@api_view(["GET", "POST"])
+class DeliveryCrewManagerGroup(APIView):
+    # Getting all delivery crew group members
+    def get(self, request):
+        users = User.objects.filter(groups__name="Delivery crew")
+        serializer_class = UserSerializer(users, many=True)
+        if request.user.groups.filter(name="Manager"):
+            return Response(serializer_class.data)
+        return Response("Not authorized to view this page", status=status.HTTP_401_UNAUTHORIZED)
+
+    # Adding a user to delivery crew group through the payload
+    def post(self, request, format=None):
+        if request.user.groups.filter(name="Manager"):
+            serializer_class = UserSerializer(data=request.data)
+            if serializer_class.is_valid():
+                user = serializer_class.save()
+                manager_group = Group.objects.get_or_create(name='Delivery crew')
+                manager_group.user_set.add(user)
+                return Response(serializer_class.data, status=status.HTTP_201_CREATED)
+            return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response("Not authorized...", status=status.HTTP_401_UNAUTHORIZED)
 
     
