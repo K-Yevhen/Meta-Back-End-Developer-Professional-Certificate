@@ -189,4 +189,46 @@ class DeliveryCrewManagerGroup(APIView):
             return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response("Not authorized...", status=status.HTTP_401_UNAUTHORIZED)
 
-    
+@csrf_exempt
+@throttle_classes([AnonRateThrottle, UserRateThrottle])
+@api_view(["DELETE"])
+class RemoveUserFromDeliveryCrewGroup(APIView):
+    def delete(self, request, id):
+        try:
+            user = User.objects.get(id=id)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Remove user from the deliveryCrewGroup
+        group = Group.objects.get(name='Delivery crew')
+        if request.user.groups.filter(name="Manager"):
+            if group in user.groups.all():
+                user.groups.remove(group)
+                return Response("User removed successfully!", status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'User is not a member of the manager group'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response("Not authorized", status=status.HTTP_401_UNAUTHORIZED)
+
+@csrf_exempt
+@throttle_classes([AnonRateThrottle, UserRateThrottle])
+@api_view(["GET", "POST"])
+class CartView(APIView):
+    # Getting all the cart items that belong to the signed user
+    def get(self, request):
+        user = request.user
+        carts = Cart.objects.filter(user=user)
+        serializer_class = CartItemSerializer(carts, many=True)
+        if request.user.groups.filter(name="customer"):
+            return Response(serializer_class.data, status=status.HTTP_200_OK)
+        return Response("Not authorized to view this page", status=status.HTTP_401_UNAUTHORIZED)
+
+    # Adding item to cart by a customer
+    def post(self, request):
+        if request.user.groups.filter(name="customer"):
+            serializer_class = CartItemSerializer(data=request.data)
+            if serializer_class.is_valid():
+                serializer_class.save()
+                return Response(serializer_class.data, status=status.HTTP_200_OK)
+            return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response("Not authorized...", status=status.HTTP_400_BAD_REQUEST)
+
