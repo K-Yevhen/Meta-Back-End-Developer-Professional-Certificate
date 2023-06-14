@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('LittleLemonDRF', '0002_auto_20230609_1153'),
+        ('LittleLemonAPI', '0002_auto_20230609_1153'),
     ]
 
     operations = [

@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('LittleLemonDRF', '0004_auto_20230612_1249'),
+        ('LittleLemonAPI', '0004_auto_20230612_1249'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='menuitem',
             name='category',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='LittleLemonDRF.category'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='LittleLemonAPI.category'),
         ),
     ]

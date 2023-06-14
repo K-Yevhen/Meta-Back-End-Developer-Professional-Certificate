@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('LittleLemonDRF', '0005_alter_menuitem_category'),
+        ('LittleLemonAPI', '0005_alter_menuitem_category'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='orderitem',
             name='order',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order_items', to='LittleLemonDRF.order'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order_items', to='LittleLemonAPI.order'),
         ),
     ]

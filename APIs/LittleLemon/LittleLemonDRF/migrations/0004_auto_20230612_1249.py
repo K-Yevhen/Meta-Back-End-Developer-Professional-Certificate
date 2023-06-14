@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('LittleLemonDRF', '0003_auto_20230612_0952'),
+        ('LittleLemonAPI', '0003_auto_20230612_0952'),
     ]
 
     operations = [
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(db_index=True, max_length=255)),
                 ('price', models.DecimalField(db_index=True, decimal_places=2, max_digits=6)),
                 ('featured', models.BooleanField(db_index=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='LittleLemonDRF.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='LittleLemonAPI.category')),
             ],
         ),
         migrations.CreateModel(
@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
                 ('quantity', models.SmallIntegerField()),
                 ('unit_price', models.DecimalField(decimal_places=2, max_digits=6)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('menuitem', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='LittleLemonDRF.menuitem')),
+                ('menuitem', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='LittleLemonAPI.menuitem')),
                 ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cart',
             name='menuitem',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='LittleLemonDRF.menuitem'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='LittleLemonAPI.menuitem'),
         ),
         migrations.AddField(
             model_name='cart',

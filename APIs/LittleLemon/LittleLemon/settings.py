@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "djoser",
     "rest_framework",
     "rest_framework.authtoken",
-    "LittleLemonDRF",
+    "LittleLemonAPI",
 ]
 
 MIDDLEWARE = [
@@ -131,11 +131,11 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_RENDERER_CLASSES': [
-    #     'rest_framework.renderers.JSONRenderer',
-    #     'rest_framework.renderers.BrowsableAPIRenderer',
-    #     'rest_framework_xml.renderers.XMLRenderer',
-    # ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework_xml.renderers.XMLRenderer',
+    ],
     'DEFAULT_FILTER_CLASSES' : [
         'rest_framework.filters.OrderingFilter',
         'rest_framework.filters.SearchFilter',
@@ -144,7 +144,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 2,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_THROTTLE_RATES': {
         "anon": "5/minute",
@@ -153,5 +153,5 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    "USER_ID_FIELD": "username",
+    'USER_ID_FIELD': 'username'
 }
