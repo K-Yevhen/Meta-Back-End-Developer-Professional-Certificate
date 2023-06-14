@@ -48,47 +48,40 @@ from .models import Category, MenuItem, Cart, Order, OrderItem
 #
 #
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', 'slug', 'title']
-
 
 class MenuItemSerializer(serializers.ModelSerializer):
-    category_id = serializers.IntegerField(write_only=True)
-    category = CategorySerializer(read_only=True)
-
     class Meta:
         model = MenuItem
-        fields = [
-            'id', 'title', 'price', 'featured', 'category', 'category_id'
-        ]
+        fields = "__all__"
+        depth = 1
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'email']
+        fields = ['username']
 
 
-class CartItemSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+class CartSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    menuitem = MenuItemSerializer(read_only=True)
 
     class Meta:
         model = Cart
-        fields = ['id', 'user', 'menuitem', 'quantity', 'unit_price', 'price']
-
+        fields = "__all__"
 
 class OrderItemSerializer(serializers.ModelSerializer):
+    order = UserSerializer(read_only=True)
+    menuitem = MenuItemSerializer(read_only=True)
+
     class Meta:
         model = OrderItem
-        fields = ['id', 'menuitem', 'quantity', 'unit_price', 'price']
-
+        fields = "__all__"
 
 class OrderSerializer(serializers.ModelSerializer):
-    order_items = OrderItemSerializer(read_only=True, many=True)
+    user = UserSerializer(read_only=True)
+    delivery_crew = UserSerializer(read_only=True)
 
     class Meta:
         model = Order
-        fields = ['id', 'user', 'delivery_crew', 'order_items', 'status', 'total', 'date']
-
+        fields = "__all__"

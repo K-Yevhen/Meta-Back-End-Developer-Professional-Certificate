@@ -10,7 +10,7 @@ from . import views
 # ]
 #
 urlpatterns = [
-    path('menu-items/', views.MenuItemsView),
+    path('menu-items/', views.MenuItemView),
     path('menu-items/<int:id>', views.MenuItemDetail),
     path('groups/manager/users', views.UserGroupManagement),
     path('groups/manager/users/<int:id>', views.RemoveUserFromManagerGroup),
