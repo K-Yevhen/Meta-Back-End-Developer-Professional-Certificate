@@ -1,0 +1,28 @@
+Superuser:
+    username: admin
+    password: admin
+    token: c1c44412777a69f10a2ea7105018b9851e29feaf
+
+Customer_1:
+    username: Customer_1
+    password: 12admin12
+
+Customer_2:
+    username: Customer_2
+    password: 12admin12
+
+Delivery_1:
+    username: Delivery_1
+    password: 12admin12
+
+Delivery_2:
+    username: Delivery_1
+    password: 12admin12
+
+Manager 1:
+    username: Manager_1
+    password: 12admin12
+
+Manager 2:
+    username: Manager_2
+    password: 12admin12
