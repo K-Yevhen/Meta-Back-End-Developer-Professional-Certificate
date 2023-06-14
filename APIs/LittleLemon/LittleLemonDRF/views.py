@@ -55,7 +55,6 @@ from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from django.views.decorators.csrf import csrf_exempt
 
 
-@csrf_exempt
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class MenuItemsView(generics.ListCreateAPIView):
     queryset = MenuItem.objects.select_related('category').all()  # retrieve related objects in a single query
@@ -99,7 +98,7 @@ class MenuItemsView(generics.ListCreateAPIView):
             return super().post(request)
         return Response({"message": "You are not authorized"}, status=status.HTTP_403_FORBIDDEN)
 
-@csrf_exempt
+
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class MenuItemDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = MenuItem.objects.all()
@@ -124,7 +123,6 @@ class MenuItemDetailView(generics.RetrieveUpdateDestroyAPIView):
         return Response({"message": "You are not authorized"}, status=status.HTTP_403_FORBIDDEN)
 
 
-@csrf_exempt
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class ManagersListView(generics.ListCreateAPIView):
     queryset = User.objects.filter(groups__name="Manager")
@@ -147,7 +145,6 @@ class ManagersListView(generics.ListCreateAPIView):
         return Response({"message": "You are not authorized"}, status=status.HTTP_403_FORBIDDEN)
 
 
-@csrf_exempt
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class ManagerRemoveView(generics.DestroyAPIView):
     queryset = User.objects.all()
@@ -164,7 +161,6 @@ class ManagerRemoveView(generics.DestroyAPIView):
         return Response({"message": "You are not authorized"}, status=status.HTTP_403_FORBIDDEN)
 
 
-@csrf_exempt
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class DeliveryCrewListView(generics.ListCreateAPIView):
     queryset = User.objects.filter(groups__name="Delivery crew")
@@ -187,7 +183,6 @@ class DeliveryCrewListView(generics.ListCreateAPIView):
         return Response({"message": "You are not authorized"}, status=status.HTTP_403_FORBIDDEN)
 
 
-@csrf_exempt
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class DeliveryCrewRemoveView(generics.DestroyAPIView):
     queryset = User.objects.all()
@@ -204,7 +199,6 @@ class DeliveryCrewRemoveView(generics.DestroyAPIView):
         return Response({"message": "You are not authorized"}, status = status.HTTP_403_FORBIDDEN)
 
 
-@csrf_exempt
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class CartItemsView(generics.ListCreateAPIView, generics.DestroyAPIView):
     queryset = Cart.objects.all()
@@ -240,7 +234,6 @@ class CartItemsView(generics.ListCreateAPIView, generics.DestroyAPIView):
         return Response({"message": "You are not authenticated."}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-csrf_exempt
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class OrdersListCreateView(generics.ListCreateAPIView):
     queryset = Order.objects.all()  # Get all Order objects from the database
@@ -311,7 +304,6 @@ class OrdersListCreateView(generics.ListCreateAPIView):
         return Response({"message": "You are not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-@csrf_exempt
 @permission_classes([IsAuthenticated])
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class OrderDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -368,7 +360,6 @@ class OrderDetailView(generics.RetrieveUpdateDestroyAPIView):
         return Response({"message": "You are not authorized"}, status=status.HTTP_403_FORBIDDEN)
 
 
-@csrf_exempt
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
 class CategoriesView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
